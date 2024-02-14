@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                margin: 0;
+                min-width: 250px;
+            }
+            * {
+                 box-sizing: border-box;
+            }
+  ul {
+    margin: 10;
+    padding: 0;
+  }
+  ul li {
+    padding: 12px 8px 12px 40px;
+    background: #c2d8e4;
+    position: relative;
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  ul li:nth-child(odd) {
+    background: hsl(191, 47%, 91%);
+  }
+  ul li:hover {
+    background: #959695;
+  }
+  ul li.checked {
+    background: #7c7c7c;
+    text-decoration:underline;
+    color: #fff;
+  }
+  ul li.checked::before {
+    border-color: #050505;
+    border-style:outset;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 15px;
+    content: '';
+    position: absolute;
+    transform: rotate(45deg);
+    height: 28px;
+    width: 10px;
+  }
+  .close {
+    position: absolute;
+    padding: 12px 16px 12px 16px;
+    right: 0;
+    top: 0;
+  }
+  .close:hover {
+    background-color: #36f449;
+    color: rgb(9, 9, 9);
+  }
+  .header {
+    color: rgb(253, 248, 248);
+    background-color: #fc06a6;
+    text-align: center;
+    padding: 25px 30px;
+  }
+  .header:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  input {
+    float: left;
+    border: none;
+    padding: 20px;
+    width: 75%;
+    font-size: 20px;
+  }
+  .addBtn {
+    width: 24%;
+    text-align: center;
+    background: #d9d9d9;
+    color: #514f94;
+    padding: 20px;
+    float: left;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .addBtn:hover {
+    background-color: #f49edc;
+  }
+  center {
+    font-size: 1.5rem;
+    background-color: #06ddfe;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 15px 10px rgba(57, 2, 255, 0.19), 0 6px 6px rgba(244, 3, 3, 0.23);
+    color: #fafafa;
+  }
+  center a {
+    color: #f5f5f8;
+    text-decoration: none;
+  }
+  
+  </style>
+</head>
+<body>
+    <div id="myDIV" class="header">
+        <h1><i>To-Do List</i></h1>
+        <input type="text" id="myInput" placeholder="Title...">
+        <span onclick="newElement()" class="addBtn">Add</span>
+      </div>
+      <center>
+        Created by
+        <a href="#">Vandana</a>
+      </center>
+      <ul id="myUL">
+        <li>Read a Newspaper</li>
+        <li class="checked"> Buy fruits</li>
+        <li>pay bill</li>
+        <li>task2</li>
+        <li>healthy food</li>
+        <li>traveling</li>
+      </ul>
+      <script>
+        var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+
+      </script>
+</body>
+</html>
